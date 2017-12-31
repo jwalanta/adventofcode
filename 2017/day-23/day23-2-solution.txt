@@ -1,0 +1,196 @@
+# indenting negative jnz -> loops. positive jnz are if statements
+
+set b 93
+set c b
+jnz a 2
+jnz 1 5
+mul b 100
+sub b -100000
+set c b
+sub c -17000
+	set f 1
+	set d 2
+		set e 2
+			set g d
+			mul g e
+			sub g b
+			jnz g 2
+			set f 0
+			sub e -1
+			set g e
+			sub g b
+			jnz g -8
+		sub d -1
+		set g d
+		sub g b
+		jnz g -13
+	jnz f 2
+	sub h -1
+	set g b
+	sub g c
+	jnz g 2
+	jnz 1 3
+	sub b -17
+	jnz 1 -23
+
+===
+
+# converting jnz statements to loops or if statements
+
+
+set b 93
+set c b
+
+if (a != 0) {
+	mul b 100
+	sub b -100000
+	set c b
+	sub c -17000
+}
+
+do{
+	
+	set f 1
+	set d 2
+
+	do {
+		set e 2
+
+		do{
+			set g d
+			mul g e
+			sub g b
+			jnz g 2
+			set f 0
+			sub e -1
+			set g e
+			sub g b
+		} while (g!=0) //jnz g -8
+
+		sub d -1
+		set g d
+		sub g b
+
+	} while (g !=0) //jnz g -13
+
+	if (f != 0){ // jnz f 2
+		sub h -1
+	}
+
+	set g b
+	sub g c
+	
+	if (g == 0) { // jnz g 2
+		break // jnz 1 3
+	}
+
+	sub b -17
+
+} while (1) // jnz 1 -23
+
+
+===
+
+# even more high level
+
+b = c = 93
+
+if (a != 0){
+	b = b * 100 + 100000
+	c = b + 17000
+}
+
+
+do {
+	f = 1
+	d = 2
+
+	do {
+
+		e = 2
+
+		do {
+
+			g = d * e - b
+
+			if g == 0{
+				f = 0
+			}
+
+			e++
+			g = e - b
+
+		} while (g != 0)
+
+		d++
+		g = d - b
+
+	} while (g != 0)
+
+	if ( f != 0 ) h++
+
+	g = b - c
+	b += 17
+
+} while (g!=0)
+
+
+
+===
+
+the loops are in the form:
+
+e=2
+do{
+	...
+	e++
+	g = e - b
+} while (g!=0)
+
+these can be converted to for loops like this:
+
+for (e = 2; e <= b; e++){
+	
+}
+
+we're only concerned with optimizing the loop, which runs forever
+
+===
+
+for (b=0; b<=c; b+=17){
+	f = 1 // this looks like a flag
+	for (d = 2; d <= b; d++){
+		for (e = 2; e <= b; e++){
+			if (d * e == b) {
+				f == 0
+			}
+		}
+
+	}
+	if (f == 0) h++
+}
+
+== 
+
+the inner two loops is the check to see if b is a prime or not
+which is rather inefficient way of checking for prime
+(it's checking for every possible combination of d * e that equals to b)
+
+it's prime if the f == 1 after the loop ends
+
+so this loop is trying to count number of non-prime values between b and c
+
+===
+
+now the program is stuck at b=109300, and c=126300 (in my case)
+we can write the following python code to compute the value of h
+with hopefully better and faster implementation of prime()
+
+b = 109300
+c = 126300
+h = 0
+for b in range(c, c + 1, 17):
+	if not prime(b):
+		h += 1
+
+print h
