@@ -52,7 +52,7 @@ def find_available_slot():
 def fill_workers():
 
     # find tasks that be done next
-    for s in letters:
+    for s in sorted(letters):
 
         slot = find_available_slot()
         if slot == None:
@@ -61,12 +61,7 @@ def fill_workers():
         # find next available task and put in worker slot
         if can_be_done_next(s):
             workers[slot] = (s, 60+ord(s)-64)
-
-    # remove used letters
-    for w in workers:
-        if w[0] in letters:
-            letters.remove(w[0])
-
+            letters.remove(s)
 
 
 # remove the quickest task and add time to total
