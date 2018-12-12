@@ -20,14 +20,13 @@ for line in lines:
     elif "=>" in line:
         changes[line.split()[0]] = line.split()[2]
 
-
 pos = 0
 for _ in range(20):
     newstate = ""
-    for i in range(-5,len(state)+5):
+    for i in range(-5, len(state) + 5):
         match = ""
-        for j in range(i-2,i+3):
-            if j<0 or j>=len(state):
+        for j in range(i - 2, i + 3):
+            if j < 0 or j >= len(state):
                 match = match + "."
             else:
                 match = match + state[j]
@@ -36,7 +35,7 @@ for _ in range(20):
             newstate = newstate + changes[match]
         else:
             newstate = newstate + "."
-    
+
     state = newstate
     pos = pos - 5
 
@@ -44,10 +43,7 @@ total = 0
 for i in range(len(state)):
     if state[i] == "#":
         total = total + pos
-    
+
     pos = pos + 1
 
 print total
-
-
-
