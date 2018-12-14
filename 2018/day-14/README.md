@@ -1,0 +1,2 @@
+- `day14-02.py`: python implementation for part 2 took too long, so wrote `day14-02.c` in C. runs in couple seconds
+- `day14-01.c`: rewrote part 1 in C (for the sake of it)
