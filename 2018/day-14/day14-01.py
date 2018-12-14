@@ -9,36 +9,23 @@ import sys
 
 input = 505961
 
-recipes = [3,7]
+recipes = [3, 7]
 e1 = 0
 e2 = 1
 
 while len(recipes) < (input + 10):
-
-    if len(recipes) % 100 == 0:
-        print len(recipes)
 
     total = recipes[e1] + recipes[e2]
 
     if total < 10:
         recipes.append(total)
     else:
-        recipes.append(int(total/10))
-        recipes.append(total%10)
-
-    #recipes = recipes + map(int, list(str(total)))
+        recipes.append(int(total / 10))
+        recipes.append(total % 10)
 
     # pick a new current recipe
-    etotal = 1 + recipes[e1]
-    while etotal:
-        e1 = (e1 + 1) % len(recipes)
-        etotal = etotal -1
-
-    # elf 1
-    etotal = 1 + recipes[e2]
-    while etotal:
-        e2 = (e2 + 1) % len(recipes)
-        etotal = etotal -1
+    e1 = (e1 + 1 + recipes[e1]) % len(recipes)
+    e2 = (e2 + 1 + recipes[e2]) % len(recipes)
 
     # # print recipes
     # for i in range(len(recipes)):
@@ -50,6 +37,4 @@ while len(recipes) < (input + 10):
     #         print "",recipes[i],"",
     # print
 
-
-print "".join(map(str,recipes[input:input+10]))
-        
+print "".join(map(str, recipes[input:input + 10]))

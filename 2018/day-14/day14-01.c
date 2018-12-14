@@ -22,7 +22,7 @@ int main(){
     n[0] = 3;
     n[1] = 7;
 
-    int i, total, etotal;
+    int i, total;
     
     for (i = 0; i < NSIZE; i++){
 
@@ -40,11 +40,8 @@ int main(){
             if (total_recipes == input+10) break;
         }
 
-        etotal = 1 + n[e1];
-        while (etotal--) e1 = (e1 + 1) % total_recipes;
-
-        etotal = 1 + n[e2];
-        while (etotal--) e2 = (e2 + 1) % total_recipes;
+        e1 = (e1+1+n[e1]) % total_recipes;
+        e2 = (e2+1+n[e2]) % total_recipes;
         
         /* print recipe scores */
         /*
