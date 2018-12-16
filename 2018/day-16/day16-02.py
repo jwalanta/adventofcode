@@ -15,6 +15,7 @@ opcodes = "addr addi mulr muli banr bani borr bori setr seti gtir gtri gtrr eqir
 # number to operation map
 opmap = [set([]) for _ in range(16)]
 
+
 # execute instruction on register, return changed register
 def execute(register, instruction):
     r = register[:]
@@ -63,14 +64,15 @@ def execute(register, instruction):
 
     return r
 
-c=0
+
+c = 0
 count = 0
 while c < len(lines):
     line = lines[c]
     if "Before" in line:
-        register = map(int,line[9:19].split(", "))
-        instruction = map(int,lines[c+1].split())
-        output = map(int,lines[c+2][9:19].split(", "))
+        register = map(int, line[9:19].split(", "))
+        instruction = map(int, lines[c + 1].split())
+        output = map(int, lines[c + 2][9:19].split(", "))
 
         match = 0
         for op in opcodes:
@@ -81,10 +83,9 @@ while c < len(lines):
                 match = match + 1
                 opmap[instruction[0]].add(op)
 
-        c=c+3
+        c = c + 3
     else:
-        c=c+1
-
+        c = c + 1
 
 # resolve opcodes
 while True:
@@ -95,7 +96,7 @@ while True:
             for j in range(16):
                 if i == j:
                     continue
-                
+
                 toremove = list(opmap[i])[0]
                 if toremove in opmap[j]:
                     opmap[j].remove(toremove)
@@ -104,12 +105,11 @@ while True:
     if max([len(opmap[i]) for i in range(16)]) == 1:
         break
 
-
 # execute instructions for part 2
 f = open("day16-input2.txt")
 lines = f.read().split("\n")
 
-register = [0,0,0,0]
+register = [0, 0, 0, 0]
 for line in lines:
     ins = map(int, line.split())
     ins[0] = list(opmap[ins[0]])[0]
