@@ -56,7 +56,7 @@ for line in lines:
 # and minimize for distance from origin
 o = Optimize()
 
-o.maximize(total_within_range)
+o.maximize(expr)
 o.minimize(z3mdist(0, 0, 0, x, y, z))
 
 # check for answers
