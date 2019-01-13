@@ -41,7 +41,6 @@ lines = f.read().split("\n")
 
 # define variables
 x, y, z = Ints('x y z')
-total_within_range = Int('total_within_range')
 expr = 0
 
 # we now create the expression with all the bot points. each will return 1 if
@@ -56,8 +55,6 @@ for line in lines:
 # maximize it for total bots within range
 # and minimize for distance from origin
 o = Optimize()
-
-o.add(total_within_range == expr)
 
 o.maximize(total_within_range)
 o.minimize(z3mdist(0, 0, 0, x, y, z))
