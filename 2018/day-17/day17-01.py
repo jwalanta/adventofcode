@@ -7,6 +7,7 @@
 
 import re
 import sys
+from PIL import Image
 
 f = open("day17-input.txt")
 lines = f.read().split("\n")
@@ -37,7 +38,7 @@ maxy = max([y for x, y in D])
 
 # print to file
 def print_underground_to_file():
-    f = open("/tmp/day17.txt", "w")
+    f = open("day17-output.txt", "w")
 
     for y in range(miny - 5, maxy + 5):
         lnum = "%4d " % y
@@ -53,6 +54,25 @@ def print_underground_to_file():
         f.write("\n")
 
     f.close()
+
+
+# output to image
+def print_underground_to_image():
+    img = Image.new('RGB', (maxx - minx + 2, maxy + 1), "white")
+    p = img.load()  # pixel map
+
+    water_color = (0x43, 0x92, 0xF1)
+    flow_color = (0xFF, 0x64, 0x56)
+    wall_color = (0, 0, 0)
+
+    for x, y in D:
+        p[x - minx + 1, y] = wall_color
+
+    for x, y in water:
+        p[x - minx + 1, y] = flow_color if water[(x, y)] == "|" else water_color
+
+    img = img.resize((img.size[0]*2, img.size[1]*2))
+    img.save("day17-output.png")
 
 
 # print on screen
@@ -155,6 +175,7 @@ while True:
 
             y -= 1
 
+#print_underground_to_image()
 #print_underground_to_file()
 #print_underground()
 
