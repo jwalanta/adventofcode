@@ -7,7 +7,7 @@
 
 def read_input():
     f = open("input.txt")
-    return list(map(int, f.read().split(",")))
+    return [int(n) for n in f.read().split(",")]
 
 def execute(op, x, y):
     p = 0
