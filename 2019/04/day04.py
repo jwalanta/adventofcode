@@ -10,7 +10,7 @@ min, max = 109165, 576723
 
 # part 1. find if number contains adjacent digits
 def adjacent(n_str):
-    for s in ["00", "11", "22", "33", "44", "55", "66", "77", "88", "99"]:
+    for s in [str(i) * 2 for i in range(10)]:
         if n_str.find(s) > -1:
             return True
     return False
