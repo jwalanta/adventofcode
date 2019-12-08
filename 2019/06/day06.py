@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 #
-# Solution for https://adventofcode.com/2019/day/5
+# Solution for https://adventofcode.com/2019/day/6
 #
 
 f = open("input.txt")
