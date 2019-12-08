@@ -10,6 +10,8 @@ import itertools
 op = list(map(int, open("input.txt").read().split(",")))
 
 # get value based on mode
+
+
 def val(op, p, mode):
     if mode == 0:   # position mode (return the value at position)
         return op[op[p]]
@@ -17,6 +19,8 @@ def val(op, p, mode):
         return op[p]
 
 # run the opcodes
+
+
 def execute(op, n):
     p = 0
 
@@ -79,7 +83,7 @@ def execute(op, n):
 hi = 0
 seq = []
 
-for phases in itertools.permutations(range(0,5)):
+for phases in itertools.permutations(range(0, 5)):
     n = 0
     for ph in phases:
         n = execute(op[:], [ph, n])
@@ -90,4 +94,4 @@ for phases in itertools.permutations(range(0,5)):
 
 
 print("Part 1: %d" % hi)
-#print(seq)
+# print(seq)

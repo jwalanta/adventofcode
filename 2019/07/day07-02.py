@@ -17,8 +17,8 @@ def val(op, p, mode):
         return op[p]
 
 
-## Rewriting the function to use generators, so that it stops when needing 
-## input and when yielding output
+# Rewriting the function to use generators, so that it stops when needing
+# input and when yielding output
 
 # run the opcodes
 def execute(op):
@@ -87,20 +87,20 @@ def execute(op):
 #
 hi = 0
 seq = []
-for phases in itertools.permutations(range(0,5)):
-    n = 0 # input for first amp is 0
+for phases in itertools.permutations(range(0, 5)):
+    n = 0  # input for first amp is 0
     for ph in phases:
-        amp = execute(op[:]) # create amp
+        amp = execute(op[:])  # create amp
         next(amp)   # run till it needs input
-        amp.send(ph) # first input is phase setting
-        n = amp.send(n) # second input is output from previous amp
+        amp.send(ph)  # first input is phase setting
+        n = amp.send(n)  # second input is output from previous amp
 
     if n > hi:
         hi = n
         seq = phases[:]
 
 print("Part 1: %d" % hi)
-#print(seq)
+# print(seq)
 
 
 #
@@ -108,16 +108,16 @@ print("Part 1: %d" % hi)
 #
 hi = 0
 seq = []
-for phases in itertools.permutations(range(5,10)):
+for phases in itertools.permutations(range(5, 10)):
 
     # create feedback loop amps with this phase setting
     amps = []
-    
+
     # first, create amps and provide phase setting as first input value
     for ph in phases:
         # create amps with phase value
         amp = execute(op[:])
-        
+
         # run and wait till input is required
         next(amp)
 
@@ -128,16 +128,16 @@ for phases in itertools.permutations(range(5,10)):
         amps.append(amp)
 
     # after the first value, i/o is signal from amps
-    signal = 0 # signal to amp A for the first time is 0
+    signal = 0  # signal to amp A for the first time is 0
 
     # run amps in feedback mode till it breaks
     while True:
-        
+
         # first round, pass signal through amps
         for amp in amps:
             # provide input (signal from previous amp)
             signal = amp.send(signal)
-        
+
         # second round, run the program till it needs input or breaks
         try:
             for amp in amps:
@@ -151,4 +151,4 @@ for phases in itertools.permutations(range(5,10)):
 
 
 print("Part 2: %d" % hi)
-#print(seq)
+# print(seq)
