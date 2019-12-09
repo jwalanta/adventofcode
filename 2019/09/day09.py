@@ -5,9 +5,7 @@
 # Solution for https://adventofcode.com/2019/day/9
 #
 
-#from defaultlist import defaultlist
-
-op = list(map(int, open("input.txt").read().strip().split(",")))
+input = list(map(int, open("input.txt").read().strip().split(",")))
 
 # run the opcodes
 def execute(op, n):
@@ -98,5 +96,5 @@ def execute(op, n):
 #op = [1102,34915192,34915192,7,4,7,99,0]
 #op = [104,1125899906842624,99]
 
-print("Part 1: %d" % execute(op, 1)[0])
-print("Part 2: %d" % execute(op, 2)[0])
+print("Part 1: %d" % execute(input[:], 1)[0])
+print("Part 2: %d" % execute(input[:], 2)[0])
