@@ -20,14 +20,7 @@ def execute(op, n):
 
     # get value based on mode
     def val(op, p, mode):
-        if mode == 0:   # position mode (return the value at position)
-            return op[op[p]]
-        elif mode == 1:  # intermediate mode (return the value)
-            return op[p]
-        elif mode == 2:  # relative mode
-            return op[op[p] + relative_base]
-        else:
-            print("ERROR")
+        return op[addr(op, p, mode)]
 
     # get address based on mode
     def addr(op, p, mode):
