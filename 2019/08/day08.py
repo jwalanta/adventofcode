@@ -42,6 +42,6 @@ for st in range(0, len(input), layer_length):
 
 # print
 print("Part 2:")
-merged_layer = merged_layer.replace("0", " ").replace("1", "#")
+merged_layer = merged_layer.replace("0", " ").replace("1", "█")
 for l in range(0, 6):
     print(merged_layer[l*25:(l+1)*25])
