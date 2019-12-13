@@ -117,12 +117,12 @@ def part2(animate=True):
 
     global joystick
 
-    opcode[0] = 2
+    opcode[0] = 2 # set memory at 0 to 2 for free plays
     arcade = execute(opcode[:])
     px, bx = 0, 0    # paddle x, ball x
     score = 0
 
-    icons = {0: " ", 1: "█", 2: "■", 3: "=", 4: "o"}
+    icons = {0: " ", 1: "█", 2: "■", 3: "=", 4: "⦿"}
 
     if animate:
         screen = curses.initscr()
@@ -139,16 +139,13 @@ def part2(animate=True):
 
             if animate and x >= 0 and y >= 0:
                 screen.addstr(1, 1, "SCORE=" + str(score))
-                #screen.addstr(y+2,x+2,icons[n], curses.A_NORMAL | curses.color_pair(n+5))
                 screen.addstr(y+2, x+1, icons[n])
                 screen.refresh()
                 curses.napms(pause)
 
             # store paddle and ball x coordinates
-            if n == 3:
-                px = x
-            if n == 4:
-                bx = x
+            px = x if n == 3 else px
+            bx = x if n == 4 else bx
 
             # adjust
             if bx < px:
@@ -168,7 +165,7 @@ def part2(animate=True):
         pass
 
     if animate:
-        curses.napms(3000)
+        curses.napms(1000)
         curses.endwin()
 
     print("Part 2: %d" % score)
