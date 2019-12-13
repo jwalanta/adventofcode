@@ -6,7 +6,6 @@
 #
 
 import os
-import time
 import curses
 
 opcode = list(map(int, open("input.txt").read().strip().split(",")))
@@ -111,28 +110,9 @@ def part1():
 
     print("Part 1: %d" % block)
 
-
-def print_grid(grid, score):
-
-    os.system('clear')
-    print(score)
-    minx = min([x[0] for x in grid.keys()])
-    maxx = max([x[0] for x in grid.keys()])
-    miny = min([x[1] for x in grid.keys()])
-    maxy = max([x[1] for x in grid.keys()])
-
-    icons = {0: " ", 1: "█", 2: "■", 3: "=", 4: "o"}
-    for y in range(miny, maxy+1):
-        for x in range(minx, maxx+1):
-            if (x, y) in grid:
-                print(icons[grid[(x, y)]], end="")
-        print()
-
-    time.sleep(.1)
-
-    #x = input("")
-
-
+#
+# Part 2
+#
 def part2(animate=True):
 
     global joystick
@@ -143,13 +123,13 @@ def part2(animate=True):
     score = 0
 
     icons = {0: " ", 1: "█", 2: "■", 3: "=", 4: "o"}
-    
+
     if animate:
-        screen = curses.initscr() 
-        curses.curs_set(0) # dont display cursor
+        screen = curses.initscr()
+        curses.curs_set(0)  # dont display cursor
 
     # animation pause. initially 0, adjusted after whole grid is drawn
-    pause = 0 
+    pause = 0
 
     try:
         while True:
@@ -157,10 +137,10 @@ def part2(animate=True):
             y = next(arcade)
             n = next(arcade)
 
-            if animate and x>=0 and y>=0:
-                screen.addstr(1,1, "SCORE=" + str(score))
+            if animate and x >= 0 and y >= 0:
+                screen.addstr(1, 1, "SCORE=" + str(score))
                 #screen.addstr(y+2,x+2,icons[n], curses.A_NORMAL | curses.color_pair(n+5))
-                screen.addstr(y+2,x+1,icons[n])
+                screen.addstr(y+2, x+1, icons[n])
                 screen.refresh()
                 curses.napms(pause)
 
@@ -181,7 +161,7 @@ def part2(animate=True):
             # if x=-1 and y=0, n is score
             if x == -1 and y == 0:
                 score = n
-                pause = 3 # adjust pause after intcode outputs score first time
+                pause = 3  # adjust pause after intcode outputs score first time
 
     except Exception as err:
         # print(err)
