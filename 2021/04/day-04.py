@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 #
-# Solution for https://adventofcode.com/2021/day/3
+# Solution for https://adventofcode.com/2021/day/4
 #
 
 nums = []
