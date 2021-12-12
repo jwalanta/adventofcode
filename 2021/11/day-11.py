@@ -69,7 +69,7 @@ def run():
 
         total_flash = total_flash + len(flashed)
 
-        print_levels(step, levels)
+        # print_levels(step, levels)
 
         if step == 100:
             total_flashes_at_100 = total_flash
@@ -82,10 +82,8 @@ def run():
 
 
 levels = read_input()
-system('clear')
-time.sleep(10)
+
 total_flash, simultaneous_flash_at = run()
+
 print("Part 1: %d" % total_flash)
 print("Part 2: %d" % simultaneous_flash_at)
-for _ in range(10):
-    print()
