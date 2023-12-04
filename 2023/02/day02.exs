@@ -1,5 +1,4 @@
 defmodule Day02 do
-
   # split input line to "n <color>" list
   def split(line) do
     line
@@ -16,16 +15,16 @@ defmodule Day02 do
     {n, _} = Integer.parse(nstr)
 
     case length(list) do
-      1 -> Map.put(max_colors, color, max(max_colors[color],n))
-      _ -> find_max(tl(list), Map.put(max_colors, color, max(max_colors[color],n)))
+      1 -> Map.put(max_colors, color, max(max_colors[color], n))
+      _ -> find_max(tl(list), Map.put(max_colors, color, max(max_colors[color], n)))
     end
-
   end
 
   def find_max_and_check_fit(line, n) do
     m = find_max(split(line))
+
     cond do
-      m["red"] <= 12 and  m["green"] <= 13 and  m["blue"] <= 14  -> n + 1
+      m["red"] <= 12 and m["green"] <= 13 and m["blue"] <= 14 -> n + 1
       true -> 0
     end
   end
@@ -50,9 +49,7 @@ defmodule Day02 do
     |> Enum.map(fn e -> find_power(e) end)
     |> Enum.sum()
   end
-
 end
-
 
 {:ok, contents} = File.read("input.txt")
 lines = String.split(contents, "\n", trim: true)

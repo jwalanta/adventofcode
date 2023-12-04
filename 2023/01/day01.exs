@@ -1,5 +1,4 @@
 defmodule Day01 do
-
   defp digit?(c) when c >= "0" and c <= "9", do: c
   defp digit?(_), do: ""
 
@@ -23,7 +22,6 @@ defmodule Day01 do
     |> String.replace("seven", "s7even")
     |> String.replace("eight", "e8ight")
     |> String.replace("nine", "n9ine")
-
   end
 
   defp get_num(str) do
@@ -36,16 +34,15 @@ defmodule Day01 do
   def part1(input) do
     input
     |> Enum.map(&get_num/1)
-    |> Enum.sum
+    |> Enum.sum()
   end
 
   def part2(input) do
     input
     |> Enum.map(&replace/1)
     |> Enum.map(&get_num/1)
-    |> Enum.sum
+    |> Enum.sum()
   end
-
 end
 
 # read input
